@@ -5,11 +5,8 @@ Vagrant.configure(2) do |config|
 
   config.vm.box = "ubuntu/trusty64"
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
+  config.vm.network "public_network", bridge: "en2: Thunderbolt Ethernet"
   config.vm.network "forwarded_port", guest: 80, host: 8080
-  config.vm.network "public_network"
 
   # config.vm.synced_folder "../data", "/vagrant_data"
 
@@ -32,7 +29,7 @@ Vagrant.configure(2) do |config|
     echo "export JAVA_HOME=/usr/lib/jvm/java-7-oracle" >> ~/.profile
 
     # get geoserver
-    wget http://downloads.sourceforge.net/project/geoserver/GeoServer/2.7.1.1/geoserver-2.7.1.1-bin.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fgeoserver%2Ffiles%2FGeoServer%2F2.7.1.1%2F&ts=1438140277 -o geoserver.zip
+    wget -q http://downloads.sourceforge.net/project/geoserver/GeoServer/2.7.1.1/geoserver-2.7.1.1-bin.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fgeoserver%2Ffiles%2FGeoServer%2F2.7.1.1%2F&ts=1438140277 -o geoserver.zip
     mkdir /usr/share/geoserver
     # chown `whoami`:`whoami` /usr/share/geoserver
     unzip geoserver.zip -d /usr/share/geoserver
